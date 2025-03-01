@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="@string/settings">
+        <ListPreference android:key="main_page_selection"
+            android:title="@string/settings_mainpage_selection"
+            app:key="mainpage_selection"
+            android:entryValues="@array/mainpage_selection_values"
+            android:entries="@array/mainpage_selection_entries" />
+        <CheckBoxPreference android:key="use_dynamic_color"
+            android:title="@string/dynamic_color_title"
+            android:summary="@string/dynamic_color_summary" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/developer">
+        <Preference android:title="cjryrx"
+            android:summary="@string/cjryrx_slogan" />
+    </PreferenceCategory>
+</PreferenceScreen>

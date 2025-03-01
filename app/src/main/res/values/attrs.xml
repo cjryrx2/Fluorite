@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AnimatableGridView">
+        <attr name="itemSpacing" format="dimension"/>
+        <attr name="parallaxFactor" format="float"/>
+        <attr name="enableParallax" format="boolean"/>
+    </declare-styleable>
+</resources>

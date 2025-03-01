@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">流</string>
+    <string name="settings_mainpage_selection">更改主页</string>
+    <string name="settings_mainpage_selection_1">数字时钟左上</string>
+    <string name="settings_mainpage_selection_2">数字时钟左下</string>
+    <string name="settings_mainpage_selection_3">数字时钟居中</string>
+    <string name="settings_mainpage_selection_4">指针时钟</string>
+    <string name="settings">设置</string>
+    <string name="developer">开发者</string>
+    <string name="cjryrx_slogan">勇敢的人先享受世界</string>
+    <string name="dynamic_color_title">使用动态颜色</string>
+    <string name="dynamic_color_summary">将时钟颜色改为背景色调</string>
+</resources>
