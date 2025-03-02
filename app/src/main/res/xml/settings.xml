@@ -10,6 +10,9 @@
         <CheckBoxPreference android:key="use_dynamic_color"
             android:title="@string/dynamic_color_title"
             android:summary="@string/dynamic_color_summary" />
+        <CheckBoxPreference android:key="hide_apps"
+            android:title="@string/hide_apps_title"
+            android:summary="@string/hide_apps_summary" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/developer">
         <Preference android:title="cjryrx"

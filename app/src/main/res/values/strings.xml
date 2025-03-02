@@ -10,4 +10,6 @@
     <string name="cjryrx_slogan">The brave enjoys the world first.</string>
     <string name="dynamic_color_title">Use Dynamic Color</string>
     <string name="dynamic_color_summary">Change the clock\'s color from the background.</string>
+    <string name="hide_apps_title">Hide App Drawer</string>
+    <string name="hide_apps_summary">After opening, you can only open the drawer by clicking the top-left corner of the screen for 10 times.</string>
 </resources>

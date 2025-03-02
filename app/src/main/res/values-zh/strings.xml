@@ -11,4 +11,6 @@
     <string name="cjryrx_slogan">勇敢的人先享受世界</string>
     <string name="dynamic_color_title">使用动态颜色</string>
     <string name="dynamic_color_summary">将时钟颜色改为背景色调</string>
+    <string name="hide_apps_title">隐藏应用抽屉</string>
+    <string name="hide_apps_summary">打开后, 你只能通过点击10次左上角打开应用抽屉。</string>
 </resources>

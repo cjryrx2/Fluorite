@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,11 +47,13 @@ public class MainActivity extends AppCompatActivity {
 
     View mainPage;
 
-    DisplayMetrics dm; 
+    DisplayMetrics dm;
+    Handler h;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        h = new Handler();
         dm = new DisplayMetrics();
         main1 = Main1Binding.inflate(getLayoutInflater());
         main2 = Main2Binding.inflate(getLayoutInflater());
@@ -141,16 +144,36 @@ public class MainActivity extends AppCompatActivity {
         ));
         Drawable finalWallpaper = wallpaper;
         containerBinding.container.setOnLongClickListener(v -> {
-            if(containerBinding.container.getCurrentView() == mainPage){
-                containerBinding.container.showNext();
-                BitmapDrawable bg = (BitmapDrawable) containerBinding.container.getBackground();
-                containerBinding.container.setBackground(Blur.BoxBlurFilter(bg.getBitmap()));
-            }else {
+            if (containerBinding.container.getCurrentView() == mainPage) {
+                if (!sp.getBoolean("hide_apps", false)) {
+                    containerBinding.container.showNext();
+                    BitmapDrawable bg = (BitmapDrawable) containerBinding.container.getBackground();
+                    containerBinding.container.setBackground(Blur.BoxBlurFilter(bg.getBitmap()));
+                }
+            } else {
                 containerBinding.container.showPrevious();
-                containerBinding.container.setBackground(finalWallpaper == null ? AppCompatResources.getDrawable(this, R.mipmap.bg) : finalWallpaper);
+                containerBinding.container.setBackground(finalWallpaper == null ? AppCompatResources.getDrawable(MainActivity.this, R.mipmap.bg) : finalWallpaper);
             }
             return false;
         });
+        if(sp.getBoolean("hide_apps", false)){
+            containerBinding.container.setOnClickListener(new View.OnClickListener() {
+                private int clickCnt = 0;
+                @Override
+                public void onClick(View v) {
+                    if(containerBinding.container.getCurrentView() == ll) return;
+                    if(clickCnt > 9) {
+                        containerBinding.container.showNext();
+                        BitmapDrawable bg = (BitmapDrawable) containerBinding.container.getBackground();
+                        containerBinding.container.setBackground(Blur.BoxBlurFilter(bg.getBitmap()));
+                        return;
+                    }
+                    clickCnt += 1;
+                    h.postDelayed(() -> clickCnt -= 1, 7000);
+
+                }
+            });
+        }
         setContentView(containerBinding.getRoot());
     }
 
