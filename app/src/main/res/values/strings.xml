@@ -12,4 +12,24 @@
     <string name="dynamic_color_summary">Change the clock\'s color from the background.</string>
     <string name="hide_apps_title">Hide App Drawer</string>
     <string name="hide_apps_summary">After opening, you can only open the drawer by clicking the top-left corner of the screen for 10 times.</string>
+    <string name="fling_shortcut_summary">Do something when you fling this device.</string>
+    <string name="fling_shortcut_title">Fling Shortcut</string>
+    <string name="fling_backtomainpage">Return to Main Page</string>
+    <string name="fling_openmusic">Open Default Music App</string>
+    <string name="fling_starthideapps">Start Hiding App Drawer</string>
+    <string name="fling_mute">Mute</string>
+    <string name="fling_start_power_title">Fling Starting Power</string>
+    <string name="fling_start_power_summary">The power you need to start the fling shortcut</string>
+    <string name="fling_none">Do Nothing</string>
+    <string name="qq">Our QQ Group: 1016481727</string>
+    <string name="choose_anim_type_title">Choose Apps Animation Type</string>
+    <string name="anim_type_none">None</string>
+    <string name="choose_anim_type_summary">Choose an animation type for the app drawer.</string>
+    <string name="anim_type_flow">Flow</string>
+    <string name="anim_type_drizzle">Drizzle</string>
+    <string name="anim_type_fly">Fly</string>
+    <string name="restart_title">Restart Launcher</string>
+    <string name="restart_summary">Instantly restart the launcher.</string>
+    <string name="columns">Column Count</string>
+    <string name="columns_summary">Use arabic numbers.</string>
 </resources>

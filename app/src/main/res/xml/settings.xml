@@ -13,8 +13,33 @@
         <CheckBoxPreference android:key="hide_apps"
             android:title="@string/hide_apps_title"
             android:summary="@string/hide_apps_summary" />
+        <ListPreference android:key="drawer_type"
+            android:entries="@array/anim_entries"
+            app:entryValues="@array/anim_values"
+            android:title="@string/choose_anim_type_title"
+            android:summary="@string/choose_anim_type_summary" />
+        <Preference android:key="restart" android:title="@string/restart_title"
+            android:summary="@string/restart_summary" />
+        <SeekBarPreference android:key="columns"
+            android:title="@string/columns"
+            app:min="1"
+            android:max="6"
+            app:defaultValue="4"/>
+        <SeekBarPreference android:key="fling_start_power"
+        android:title="@string/fling_start_power_title"
+        android:summary="@string/fling_start_power_summary"
+        app:min="400"
+        android:max="4000"
+        app:defaultValue="1000"/>
+        <ListPreference android:title="@string/fling_shortcut_title"
+            android:summary="@string/fling_shortcut_summary"
+            android:key="fling_shortcut"
+            android:entries="@array/fling_entries"
+            android:entryValues="@array/fling_values" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/developer">
+
+    <PreferenceCategory android:title="@string/developer"
+        android:summary="@string/qq">
         <Preference android:title="cjryrx"
             android:summary="@string/cjryrx_slogan" />
     </PreferenceCategory>

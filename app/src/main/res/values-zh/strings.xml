@@ -13,4 +13,24 @@
     <string name="dynamic_color_summary">将时钟颜色改为背景色调</string>
     <string name="hide_apps_title">隐藏应用抽屉</string>
     <string name="hide_apps_summary">打开后, 你只能通过点击10次左上角打开应用抽屉。</string>
+    <string name="fling_shortcut_summary">在你甩动的时候启动快捷方式。</string>
+    <string name="fling_shortcut_title">甩动快捷方式</string>
+    <string name="fling_backtomainpage">回到主页</string>
+    <string name="fling_openmusic">打开默认音乐软件</string>
+    <string name="fling_starthideapps">开始隐藏应用抽屉</string>
+    <string name="fling_mute">静音</string>
+    <string name="fling_start_power_title">甩动快捷启动力度</string>
+    <string name="fling_start_power_summary">启动甩动快捷所需的力度。</string>
+    <string name="fling_none">无</string>
+    <string name="qq">反馈QQ群: 1016481727</string>
+    <string name="choose_anim_type_title">选择应用列表动画</string>
+    <string name="anim_type_none">无</string>
+    <string name="choose_anim_type_summary">选择应用列表滑动动画</string>
+    <string name="anim_type_flow">漂流</string>
+    <string name="anim_type_drizzle">淅沥</string>
+    <string name="anim_type_fly">飞扬</string>
+    <string name="restart_title">重启启动器</string>
+    <string name="restart_summary">立即生效。</string>
+    <string name="columns">列数</string>
+    <string name="columns_summary">仅支持阿拉伯数字。</string>
 </resources>

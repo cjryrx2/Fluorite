@@ -13,6 +13,7 @@ public class AnimatableGridView extends GridView {
     private boolean enableParallax = true;
     private int columnCount = 4;
 
+    private String animType = "flow";
 
     public AnimatableGridView(Context context) {
         super(context);
@@ -26,8 +27,7 @@ public class AnimatableGridView extends GridView {
 
     private void init(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.AnimatableGridView);
-        parallaxFactor = ta.getFloat(R.styleable.AnimatableGridView_parallaxFactor, 0.24f);
-        enableParallax = ta.getBoolean(R.styleable.AnimatableGridView_enableParallax, true);
+        animType = ta.getString(R.styleable.AnimatableGridView_animationType);
         ta.recycle();
         setupScrollListener();
         setNumColumns(columnCount);
@@ -40,7 +40,6 @@ public class AnimatableGridView extends GridView {
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 applyTransformation();
-                View v = getChildAt(firstVisibleItem);
             }
 
             @Override
@@ -63,20 +62,55 @@ public class AnimatableGridView extends GridView {
         if (!enableParallax || centerY == 0 || getChildCount() == 0) return;
 
         final float maxOffset = centerY;
-        for (int i = 0; i < getChildCount(); i++) {
-            View child = getChildAt(i);
-            if (child == null) continue;
-            int childCenterY = (child.getTop() + child.getBottom()) / 2;
-            float offset = Math.abs(centerY - childCenterY);
-            float ratio = Math.min(offset / maxOffset, 1f);
-            // 视差平移
-            float translationX = (float) -Math.pow(offset * ratio * parallaxFactor, parallaxFactor + 1f);
-            float scale = 1f - 0.2f * ratio;
 
-            child.setTranslationX(translationX + 30);
-            child.setScaleX(scale);
-            child.setScaleY(scale);;
+        switch (animType){
+            case "none":
+                return;
+            default:
+                for (int i = 0; i < getChildCount(); i++) {
+                    View child = getChildAt(i);
+                    if (child == null) continue;
+                    int childCenterY = (child.getTop() + child.getBottom()) / 2;
+                    float offset = Math.abs(centerY - childCenterY);
+                    float ratio = Math.min(offset / maxOffset, 1f);
+                    float translationX = (float) -Math.pow(offset * ratio * parallaxFactor, parallaxFactor + 1f);
+                    float scale = 1f - 0.2f * ratio;
+                    child.setTranslationX(translationX + 60);
+                    child.setScaleX(scale);
+                    child.setScaleY(scale);
+                }
+                break;
+            case "drizzle":
+                for (int i = 0; i < getChildCount(); i++) {
+                    View child = getChildAt(i);
+                    if (child == null) continue;
+                    int childCenterY = (child.getTop() + child.getBottom()) / 2;
+                    float offset = Math.abs(centerY - childCenterY);
+                    float ratio = Math.min(offset / maxOffset, 1f);
+                    float translationX = (float) (-Math.cos(ratio * 8) / Math.pow(parallaxFactor, 2));
+                    float scale = 1f - 0.2f * ratio;
+                    child.setTranslationX(translationX);
+                    child.setScaleX(scale);
+                    child.setScaleY(scale);
+                }
+                break;
+            case "fly":
+                for (int i = 0; i < getChildCount(); i++) {
+                    View child = getChildAt(i);
+                    if (child == null) continue;
+                    int childCenterY = (child.getTop() + child.getBottom()) / 2;
+                    float offset = Math.abs(centerY - childCenterY);
+                    float ratio = Math.min(offset / maxOffset, 1f);
+                    float translationX = (float) offset * parallaxFactor * 2;
+                    float scale = 1f - 0.2f * ratio;
+                    child.setTranslationX(translationX);
+                    child.setScaleX(scale);
+                    child.setScaleY(scale);
+                }
+                break;
         }
+
+
     }
 
     // 提供设置方法
@@ -99,4 +133,11 @@ public class AnimatableGridView extends GridView {
     }
 
 
+    public String getAnimType() {
+        return animType;
+    }
+
+    public void setAnimType(String animType) {
+        this.animType = animType;
+    }
 }

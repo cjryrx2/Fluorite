@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fling_values">
+        <item>back</item>
+        <item>mute</item>
+        <item>music</item>
+        <item>hide</item>
+        <item>none</item>
+    </string-array>
+    <string-array name="fling_entries">
+        <item>@string/fling_backtomainpage</item>
+        <item>@string/fling_mute</item>
+        <item>@string/fling_openmusic</item>
+        <item>@string/fling_starthideapps</item>
+        <item>@string/fling_none</item>
+    </string-array>
+</resources>

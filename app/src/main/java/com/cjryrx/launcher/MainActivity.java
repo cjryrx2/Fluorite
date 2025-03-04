@@ -2,13 +2,17 @@ package com.cjryrx.launcher;
 
 import android.Manifest;
 import android.app.WallpaperManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -49,10 +53,16 @@ public class MainActivity extends AppCompatActivity {
 
     DisplayMetrics dm;
     Handler h;
-
+    private BroadcastReceiver finishReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        finishReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                finish();
+            }
+        };
         h = new Handler();
         dm = new DisplayMetrics();
         main1 = Main1Binding.inflate(getLayoutInflater());
@@ -129,9 +139,9 @@ public class MainActivity extends AppCompatActivity {
         ll.addView(gv);
         ll.setClipChildren(false);
         ll.setClipToPadding(false);
-        ll.setPadding(50, 10, 10, 20);
+        ll.setPadding(10, 10, 10, 10);
         ll.setScrollContainer(true);
-
+        gv.setAnimType((sp.getString("drawer_type", "flow")));
         containerBinding.container.setInAnimation(this, R.anim.anim_in);
         containerBinding.container.setOutAnimation(this, R.anim.anim_out);
         containerBinding.container.addView(mainPage, new FrameLayout.LayoutParams(
@@ -175,6 +185,39 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         setContentView(containerBinding.getRoot());
+        gv.setSpanCount(sp.getInt("columns", 4));
+        if(sp.getString("fling_shortcut", "none").equals("none")) return;
+        SensorManagerHelper smh = new SensorManagerHelper(this, sp.getInt("fling_start_power", 1000));
+        Runnable doOnShake;
+        switch (sp.getString("fling_shortcut", "mute")){
+            default:
+                doOnShake = () -> {
+                    AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                    if(am == null) return;
+                    am.setStreamMute(AudioManager.STREAM_MUSIC, true);
+                    //Using this deprecated function because this is the only way.
+                };
+                break;
+            case "music":
+                doOnShake = () -> {
+                    Intent intent = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_MUSIC);
+                    startActivity(intent);
+                };
+                break;
+            case "hide":
+                doOnShake = () -> sp.edit().putBoolean("hide_apps", true).apply();
+                break;
+            case "back":
+                doOnShake = () -> {
+                    if(containerBinding.container.getCurrentView() == ll) return;
+                    containerBinding.container.showNext();
+                };
+                break;
+        }
+        Runnable finalDoOnShake = doOnShake;
+        smh.stop();
+        smh.start();
+        smh.setOnShakeListener(() -> h.post(finalDoOnShake));
     }
 
     @Override
@@ -196,6 +239,14 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         mainPage.invalidate();
+        IntentFilter filter = new IntentFilter("con.cjryrx.launcher.RESTART");
+        registerReceiver(finishReceiver, filter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(finishReceiver);
     }
 
     @Override

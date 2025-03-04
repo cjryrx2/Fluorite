@@ -22,8 +22,11 @@ public class AppIcon extends androidx.appcompat.widget.AppCompatImageView {
 
     public boolean isEmpty;
 
+    private final Context context;
+
     public AppIcon(Context context) {
         super(context);
+        this.context = context;
         this.res = null;
         isEmpty = true;
         init();
@@ -32,6 +35,7 @@ public class AppIcon extends androidx.appcompat.widget.AppCompatImageView {
     public AppIcon(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.res = null;
+        this.context = context;
         isEmpty = true;
         init();
     }
@@ -63,8 +67,9 @@ public class AppIcon extends androidx.appcompat.widget.AppCompatImageView {
             }
 
             Intent i = new Intent();
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.setComponent(c);
-            getContext().startActivity(i);
+            context.startActivity(i);
         });
     }
 

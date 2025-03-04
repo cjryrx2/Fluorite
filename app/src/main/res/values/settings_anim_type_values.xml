@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="anim_values">
+        <item>drizzle</item>
+        <item>flow</item>
+        <item>fly</item>
+        <item>none</item>
+    </string-array>
+    <string-array name="anim_entries">
+        <item>@string/anim_type_drizzle</item>
+        <item>@string/anim_type_flow</item>
+        <item>@string/anim_type_fly</item>
+        <item>@string/anim_type_none</item>
+    </string-array>
+</resources>

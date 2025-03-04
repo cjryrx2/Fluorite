@@ -12,7 +12,7 @@ public class Blur {
     /** 竖直方向模糊度 */
     public static float VRADIUS = 5;
     /** 模糊迭代度 */
-    public static int ITERATIONS = 5;
+    public static int ITERATIONS = 3;
 
     public static Drawable BoxBlurFilter(Bitmap bmp) {
         int width = bmp.getWidth();
